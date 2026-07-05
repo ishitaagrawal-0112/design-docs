@@ -545,6 +545,13 @@
     border-bottom: 1px solid transparent;
   }
   details.prompt-view > summary::-webkit-details-marker { display: none; }
+  details.prompt-view > summary .sum-sub {
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    margin-left: 6px;
+  }
+  details.prompt-view + details.prompt-view { margin-top: 12px; }
   details.prompt-view > summary::after {
     content: "expand ↓";
     font-family: var(--font-mono);
@@ -853,7 +860,7 @@
     <!-- 05 HLD -->
     <section id="hld">
       <div class="eyebrow"><span>→</span><span class="num">05</span><span class="sep">/</span><span>High-level design</span></div>
-      <h2>One button, four hops.</h2>
+      <h2>End-to-end flow.</h2>
 
       <figure class="diagram-wrap hld-wrap">
         <svg viewBox="0 0 920 620" role="img" aria-labelledby="hld-title hld-desc" preserveAspectRatio="xMidYMid meet" id="hldSvg">
@@ -906,7 +913,7 @@
           <g>
             <path id="msg2" class="arrow req" d="M 340 175 L 565 175" marker-end="url(#head-req)"/>
             <text class="msg-num"   x="345" y="167">02</text>
-            <text class="msg-label" x="370" y="167">GET /traces/{traceId}/spans  <tspan class="msg-endpoint">· failed traces only</tspan></text>
+            <text class="msg-label" x="370" y="167">GET /traces/{traceId}/spans</text>
           </g>
 
           <g>
@@ -1045,11 +1052,11 @@
     <!-- 06 PROMPT DESIGN -->
     <section id="prompt">
       <div class="eyebrow"><span>→</span><span class="num">06</span><span class="sep">/</span><span>Prompt design</span></div>
-      <h2>Grounding is the only lever we have.</h2>
-      <p>The LLM behind the endpoint is a general model, not fine-tuned on UiPath data. Everything the customer sees is shaped by what the prompt asks for. Below is the prompt we ship in production today.</p>
+      <h2>The system prompt.</h2>
+      <p>The LLM behind the endpoint is a general model, not fine-tuned on UiPath data. Everything the customer sees is shaped by what the prompt asks for. The two entry points use two <em>different</em> prompt shapes — expand each to see the full text shipped in production.</p>
 
       <details class="prompt-view">
-        <summary>System prompt · per-trace <code>Analyze</code></summary>
+        <summary>Per-trace prompt <span class="sum-sub">— locked Request / Response / Result / Error format</span></summary>
         <div class="prompt-preview" aria-hidden="true">You are explaining an Integration Service event trigger trace to a non-technical customer.
 
 Output the FIRST message in this exact format and nothing else:
@@ -1059,19 +1066,8 @@ Output the FIRST message in this exact format and nothing else:
 **Result**: &lt;plain-language summary of the outcome&gt;
 **Error**: &lt;ONLY include this section if the trace failed&gt;<span class="fade">
 
-Rules:
-– Be concise. No technical jargon. No JSON snippets.
-– Use plain, customer-friendly language.
-– Do NOT include long technical IDs …
-
-Known error patterns:
-A. Re-authenticate the connection …
-B. Vendor permission or resource issue …
-C. Volume / throttling …
-D. Vendor-side transient …
-E. Platform-side transient …
-
-[click "expand" for the full grounded prompt with all patterns]</span></div>
+… rules, 5 known-pattern categories (A–E), 15 patterns, remediation
+policy, follow-up handling. Click expand for the full text.</span></div>
         <pre class="prompt-full"><code>You are explaining an Integration Service event trigger trace to a non-technical customer in Orchestrator. The same format applies to polling triggers (where the system polls a third party for new events) and webhook / push triggers (where a third party pushes events to the system).
 
 Output the FIRST message in this exact format and nothing else:
@@ -1088,7 +1084,7 @@ Rules:
 – Be concise. No technical jargon. No JSON snippets.
 – Use plain, customer-friendly language.
 – Do NOT include long technical IDs (folder keys, trace IDs, GUIDs, message IDs, base64 strings, tokens, etc.). Refer to them by purpose — e.g. "a specific folder".
-– The Error section is OPTIONAL — only for failed traces. Keep it to 1–2 sentences that describe WHAT failed. NEVER volunteer remediation or a "to prevent this…" sentence.
+– The Error section is OPTIONAL — only for failed traces. NEVER volunteer remediation or a "to prevent this…" sentence.
 
 Known error patterns — when a failed trace matches one of these, put the matching "Initial Error" line in the Error section verbatim. Hold the "Remediation" content for follow-up messages.
 
@@ -1097,11 +1093,7 @@ A. Re-authenticate the connection (customer action — will NOT recover on its o
       Initial Error: "The saved authorization for this connection is no longer accepted by the third-party service."
       Remediation (only when asked): "Open the Connections tab in Orchestrator, delete this connection, and create a fresh one."
    2. 401 "AADSTS7000222" or any "expired client secret" message.
-      Initial Error: "The client secret on the vendor's app registration has expired."
-      Remediation (only when asked): "Rotate the secret on the vendor side, then re-authenticate this connection."
    3. 401 where OAuth never completed during provisioning.
-      Initial Error: "The original sign-in for this connection never finished successfully."
-      Remediation (only when asked): "Open the Connections tab in Orchestrator and re-authenticate."
 
 B. Vendor permission or resource issue (customer action — will NOT recover on its own)
    4. 403 "AppOnly" / "AccessPolicy" / app-permission block.
@@ -1131,11 +1123,60 @@ Event Data:
 {payloadJson}</code></pre>
       </details>
 
+      <details class="prompt-view">
+        <summary>Aggregate prompt <span class="sum-sub">— free conversation over the selected traces</span></summary>
+        <div class="prompt-preview" aria-hidden="true">You are helping a customer understand multiple Integration Service
+event trigger traces together. The customer selected N trace(s) and
+asked a question about them.
+
+Rules:
+– Answer the customer's question directly.
+– Refer to each trace by its NUMBER ("Trace 1", "Trace 2") not by ID.
+– You can compare across traces, spot patterns, count successes/failures.<span class="fade">
+
+… CHRONIC vs BLIP pattern detection, group failures by root cause,
+same 5-category known-pattern catalog, remediation only when asked.
+Click expand for the full text.</span></div>
+        <pre class="prompt-full"><code>You are helping a customer in Orchestrator understand multiple Integration Service event trigger traces together. The customer selected N trace(s) and asked a question about them. Successful traces are shown as a one-line summary; failed traces also include their full event data so you can explain what went wrong.
+
+Rules:
+– Answer the customer's question directly, in plain customer-friendly language. Be concise.
+– No technical jargon, no raw JSON in your answer.
+– Refer to each trace by its NUMBER ("Trace 1", "Trace 2") exactly as labeled below. Do NOT cite raw UTC timestamps — they confuse customers.
+– Do NOT include long technical IDs (trace IDs, GUIDs, folder keys, base64 strings, tokens, etc.). Refer to things by purpose.
+– You can compare across traces, spot patterns, and count successes / failures.
+– For follow-up messages, answer naturally and conversationally — do not re-output a summary unless asked.
+
+Remediation policy — never volunteer fix steps unprompted. If the customer's question is descriptive (what / why / what happened / are these the same / how often), describe the failures using only "Initial Error" lines below. Only when the customer's question is action-oriented (how do I fix this / what do I do / what should I change / do I need to act) — or they explicitly ask for next steps — use the "Remediation (only when asked)" lines.
+
+Pattern detection — when looking across traces, distinguish:
+– CHRONIC: the same error signature repeats on most or all polls. Flag this clearly so the customer understands it won't recover on its own — but still hold the connection-level fix until they ask.
+– BLIP: one or two transient failures in an otherwise healthy run. Reassure the customer they can safely ignore unless it persists.
+If most failures share the same root cause, group them ("Traces 2, 5, and 7 all failed with the same auth error") rather than describing each individually.
+
+Known error patterns — use the matching "Initial Error" line when describing failures. Use the "Remediation" line only when the customer asks for the fix.
+
+A. Re-authenticate the connection (customer action — will NOT recover on its own)
+B. Vendor permissions / resource (customer action — will NOT recover on its own)
+C. Volume / throttling (customer tweak)
+D. Vendor-side transient (no action — recovers on its own UNLESS chronic across most polls)
+E. Platform-side transient (no action — recovers on its own)
+
+[Each category expands to the same 15 known patterns as the per-trace prompt.]
+
+Selected traces and their event data:
+
+{traceBlocks}
+
+Customer's question: {question}</code></pre>
+      </details>
+
       <h3>Rules in short</h3>
       <ul class="points">
-        <li><strong>Locked first-message format</strong> — Request / Response / Result / Error.</li>
-        <li><strong>Diagnose first, remediation on request</strong> — never volunteer a fix in the first message.</li>
-        <li><strong>Product-aware navigation</strong> — Maestro's prompt tells the LLM to phrase remediation as a cross-product step (Connections live in Orchestrator).</li>
+        <li><strong>Per-trace</strong> — locked Request / Response / Result / Error format on the first message; free conversation after.</li>
+        <li><strong>Aggregate</strong> — no locked format; the LLM is asked to compare, spot patterns, and distinguish <em>chronic vs. blip</em>.</li>
+        <li><strong>Diagnose first, remediation on request</strong> — same rule both prompts. Fixes are never volunteered.</li>
+        <li><strong>Product-aware navigation</strong> — Maestro's prompts add a cross-product rule so remediation reads <em>"Switch to Orchestrator, …"</em> instead of <em>"open the Connections tab"</em>.</li>
       </ul>
     </section>
 
@@ -1177,11 +1218,6 @@ Event Data:
         </li>
       </ul>
     </section>
-
-    <footer class="doc-footer">
-      <span>Draft · v2</span>
-      <span>Autopilot Analyze · ENGCE-58202</span>
-    </footer>
 
   </main>
 </div>
