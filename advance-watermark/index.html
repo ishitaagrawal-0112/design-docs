@@ -6,8 +6,8 @@
     --paper-2:    #eceff3;
     --paper-3:    #e4e8ee;
     --ink:        #0d1117;
-    --ink-2:      #3d434c;
-    --muted:      #6a7180;
+    --ink-2:      #23282f;
+    --muted:      #4a505b;
     --rule:       #d6dae0;
     --rule-2:     #c2c8d0;
     --accent:     #d84317;
@@ -34,8 +34,8 @@
       --paper-2:    #161b22;
       --paper-3:    #1c222b;
       --ink:        #e6edf3;
-      --ink-2:      #b6bdc7;
-      --muted:      #8b93a1;
+      --ink-2:      #c4ccd6;
+      --muted:      #9098a6;
       --rule:       #2f353d;
       --rule-2:     #3c434c;
       --accent:     #ff7b52;
@@ -53,8 +53,8 @@
     --paper-2:    #eceff3;
     --paper-3:    #e4e8ee;
     --ink:        #0d1117;
-    --ink-2:      #3d434c;
-    --muted:      #6a7180;
+    --ink-2:      #23282f;
+    --muted:      #4a505b;
     --rule:       #d6dae0;
     --rule-2:     #c2c8d0;
     --accent:     #d84317;
@@ -71,8 +71,8 @@
     --paper-2:    #161b22;
     --paper-3:    #1c222b;
     --ink:        #e6edf3;
-    --ink-2:      #b6bdc7;
-    --muted:      #8b93a1;
+    --ink-2:      #c4ccd6;
+    --muted:      #9098a6;
     --rule:       #2f353d;
     --rule-2:     #3c434c;
     --accent:     #ff7b52;
@@ -112,18 +112,6 @@
     border: 1px solid var(--rule);
     font-size: 0.85em;
     white-space: nowrap;
-  }
-
-  pre {
-    background: var(--code-bg);
-    color: var(--code-ink);
-    border: 1px solid var(--rule);
-    border-radius: 6px;
-    padding: 16px 18px;
-    overflow-x: auto;
-    font-size: 13px;
-    line-height: 1.55;
-    margin: 0;
   }
 
   /* ---------- layout scaffolding ---------- */
@@ -197,7 +185,7 @@
     color: var(--muted);
     margin-bottom: 6px;
   }
-  .meta dd { margin: 0; color: var(--ink); font-size: 14px; line-height: 1.5; }
+  .meta dd { margin: 0; color: var(--ink); font-size: 14px; line-height: 1.6; }
   .meta dd code { font-size: 12px; }
 
   .status-chip {
@@ -210,6 +198,7 @@
     font-family: var(--font-mono);
     letter-spacing: 0.04em;
     border: 1px solid;
+    margin: 2px 4px 2px 0;
   }
   .status-chip::before {
     content: "";
@@ -276,7 +265,7 @@
   section p, section li { max-width: var(--measure); color: var(--ink-2); }
   section p { margin: 0; }
 
-  /* ---------- bulleted lists (sections 1-4) ---------- */
+  /* ---------- bulleted lists ---------- */
   ul.points {
     list-style: none;
     padding: 0;
@@ -304,10 +293,7 @@
   ul.points ul li { position: relative; padding-left: 18px; font-size: 14.5px; color: var(--muted); }
   ul.points ul li::before { content: "–"; position: absolute; left: 2px; color: var(--accent); }
 
-  ul.plain { padding-left: 22px; }
-  ul.plain li { margin-bottom: 4px; }
-
-  /* ---------- callouts / pull-quotes ---------- */
+  /* ---------- callout ---------- */
   .pull {
     border-left: 3px solid var(--accent);
     padding: 4px 0 4px 20px;
@@ -316,7 +302,7 @@
     font-size: 20px;
     line-height: 1.4;
     letter-spacing: -0.005em;
-    max-width: 48ch;
+    max-width: 50ch;
     margin: 8px 0;
   }
   .pull cite {
@@ -338,34 +324,28 @@
     font-size: 14px;
     color: var(--ink-2);
     line-height: 1.55;
-    max-width: 60ch;
+    max-width: 62ch;
   }
   .note strong { color: var(--ink); }
 
-  /* ---------- HLD diagram ---------- */
+  /* ---------- diagrams ---------- */
   .diagram-wrap {
     background: var(--paper-2);
     border: 1px solid var(--rule);
     border-radius: 12px;
-    padding: 28px clamp(16px, 3vw, 32px);
+    padding: 24px clamp(16px, 3vw, 32px);
     overflow-x: auto;
     box-shadow: var(--shadow);
     max-width: none;
   }
-  .diagram-wrap svg { display: block; width: 100%; height: auto; min-width: 760px; }
-  .diagram-caption {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.5;
-    margin-top: 16px;
-    max-width: 68ch;
-    font-family: var(--font-body);
-  }
+  .diagram-wrap svg { display: block; width: 100%; height: auto; }
+  .diagram-wrap.hld svg { min-width: 760px; }
+  .diagram-wrap.motiv svg { min-width: 620px; }
   .diagram-legend {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 12px;
+    gap: 18px;
+    margin-top: 14px;
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.04em;
@@ -373,15 +353,28 @@
     text-transform: uppercase;
   }
   .diagram-legend .swatch { display: inline-flex; align-items: center; gap: 6px; }
-  .diagram-legend .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-  }
+  .diagram-legend .dot { width: 8px; height: 8px; border-radius: 50%; }
   .dot.d-req  { background: var(--accent); }
   .dot.d-resp { background: var(--ok); }
   .dot.d-user { background: var(--ink-2); }
   .dot.d-write{ background: var(--warn); }
 
-  /* SVG palette hooks (light/dark theme aware via CSS custom props) */
+  /* motivation visual */
+  svg .viz-axis   { stroke: var(--rule-2); stroke-width: 1.5; }
+  svg .viz-ok     { fill: var(--ok); }
+  svg .viz-bad    { fill: var(--accent); }
+  svg .viz-bad-s  { stroke: var(--accent); stroke-width: 2; fill: none; }
+  svg .viz-frozen { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 4; }
+  svg .viz-future { fill: color-mix(in oklab, var(--muted) 12%, transparent); stroke: var(--rule-2); stroke-width: 1; stroke-dasharray: 3 4; }
+  svg .viz-tick   { fill: var(--muted); font-family: var(--font-mono); font-size: 11px; }
+  svg .viz-glyph  { font-family: var(--font-body); font-size: 12px; font-weight: 700; fill: var(--paper); text-anchor: middle; }
+  svg .viz-cap    { font-family: var(--font-body); font-size: 12.5px; }
+  svg .viz-cap.ok   { fill: var(--ok); }
+  svg .viz-cap.bad  { fill: var(--accent); font-weight: 600; }
+  svg .viz-cap.mut  { fill: var(--muted); }
+  svg .viz-strong { fill: var(--ink); font-family: var(--font-disp); font-size: 13px; font-weight: 600; }
+
+  /* HLD sequence hooks */
   svg .lane-box    { fill: var(--paper); stroke: var(--rule-2); stroke-width: 1; }
   svg .lane-label  { fill: var(--ink); font-family: var(--font-body); font-size: 13px; font-weight: 600; }
   svg .lane-sub    { fill: var(--muted); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -399,6 +392,7 @@
   svg .msg-label   { fill: var(--ink); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em; }
   svg .msg-num     { fill: var(--accent); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.05em; }
   svg .msg-endpoint{ fill: var(--muted); font-family: var(--font-mono); font-size: 10px; }
+  svg .legend-txt  { fill: var(--muted); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; }
   svg .pulse       { fill: var(--accent); }
   svg .pulse.resp  { fill: var(--ok); }
   svg .pulse.user  { fill: var(--ink-2); }
@@ -409,7 +403,7 @@
     svg .pulse { display: none; }
   }
 
-  /* ---------- comparison / api table ---------- */
+  /* ---------- api table ---------- */
   .compare-scroll {
     overflow-x: auto;
     border: 1px solid var(--rule);
@@ -423,7 +417,7 @@
     font-size: 13px;
     line-height: 1.5;
     color: var(--ink-2);
-    min-width: 640px;
+    min-width: 560px;
   }
   table.compare th, table.compare td {
     text-align: left;
@@ -460,19 +454,8 @@
   .verb.get  { background: var(--ok); }
   .verb.post { background: var(--accent); }
 
-  /* ---------- API request block ---------- */
-  .api-block {
-    display: grid;
-    gap: 12px;
-    max-width: none;
-  }
-  .api-block .row { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 13px; }
-  .api-block .path { color: var(--ink); word-break: break-all; }
-  .api-block .path .var { color: var(--accent); }
-  .api-block .path .literal { color: var(--muted); }
-
-  /* ---------- decision / alternatives cards ---------- */
-  ul.alts { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 20px; max-width: none; }
+  /* ---------- decision cards ---------- */
+  ul.alts { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; max-width: none; }
   ul.alts li {
     border: 1px solid var(--rule);
     border-radius: 8px;
@@ -493,7 +476,6 @@
     color: var(--muted);
   }
   ul.alts .alt-verdict.chosen   { background: color-mix(in oklab, var(--ok) 18%, transparent); color: var(--ok); }
-  ul.alts .alt-verdict.rejected { background: color-mix(in oklab, var(--accent) 15%, transparent); color: var(--accent); }
   ul.alts .alt-body { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
 
   /* ---------- footer ---------- */
@@ -552,7 +534,7 @@
     </div>
     <h1>Advance Watermark</h1>
     <p class="subtitle">
-      A one-click way for customers to move a stuck poller past the window it keeps failing on — driven from the Traces tab, previewed before it commits, and scoped to the exact object that's stuck. This is the “solve it” half of self-serve event triggers; <a href="../autopilot-analyze/">Autopilot Analyze</a> is the “see it” half.
+      A one-click way for a customer to move a stuck poller past the window it keeps failing on — driven from the Traces tab, and previewed before it commits.
     </p>
     <dl class="meta">
       <div>
@@ -566,8 +548,9 @@
       <div>
         <dt>Status</dt>
         <dd>
-          <span class="status-chip review">In review · gallup #2826</span>
-          <span class="status-chip review" style="margin-left:6px;">In review · PO.Frontend</span>
+          <span class="status-chip merged">Merged · gallup</span>
+          <span class="status-chip merged">Merged · CS UI</span>
+          <span class="status-chip review">In review · PO.Frontend</span>
         </dd>
       </div>
       <div>
@@ -585,10 +568,9 @@
       <li><a href="#goal"><span class="num">03</span>Goal</a></li>
       <li><a href="#proposal"><span class="num">04</span>Proposal</a></li>
       <li><a href="#hld"><span class="num">05</span>HLD</a></li>
-      <li><a href="#apis"><span class="num">06</span>New APIs</a></li>
-      <li><a href="#auth"><span class="num">07</span>Auth &amp; guardrails</a></li>
-      <li><a href="#decisions"><span class="num">08</span>Decisions</a></li>
-      <li><a href="#open"><span class="num">09</span>Open questions</a></li>
+      <li><a href="#apis"><span class="num">06</span>APIs</a></li>
+      <li><a href="#decisions"><span class="num">07</span>Decisions</a></li>
+      <li><a href="#rollout"><span class="num">08</span>Flag &amp; rollout</a></li>
     </ol>
   </nav>
 
@@ -597,18 +579,64 @@
     <!-- 01 MOTIVATION -->
     <section id="motivation">
       <div class="eyebrow"><span>→</span><span class="num">01</span><span class="sep">/</span><span>Motivation</span></div>
-      <h2>Some triggers get stuck — and today the customer can only watch.</h2>
-      <p>A poller advances a marker after each successful poll — the <strong>watermark</strong> (<code>lastPollDate</code>) — so the next poll picks up exactly where the last one left off. That model breaks down when a window becomes un-pollable: the poller retries the same window, hits the same error, and never moves.</p>
+      <h2>A poller can get stuck, and the customer can only watch.</h2>
+      <p>A polling trigger checks a vendor on a schedule. When one check can't be completed — say the vendor refuses because there are too many records to return — that poll fails, and the trigger keeps retrying the exact same window. Same request, same failure, forever.</p>
+
+      <figure class="diagram-wrap motiv">
+        <svg viewBox="0 0 780 240" role="img" aria-labelledby="mviz-title mviz-desc">
+          <title id="mviz-title">Why a poller gets stuck</title>
+          <desc id="mviz-desc">Earlier polls succeed and the watermark advances. Then a window becomes un-pollable; the watermark freezes there and every later poll retries the same window and fails. Events after the frozen point are never fetched.</desc>
+
+          <!-- timeline axis -->
+          <line class="viz-axis" x1="40" y1="150" x2="740" y2="150"/>
+          <path class="viz-axis" d="M 732 145 L 742 150 L 732 155" fill="none"/>
+          <text class="viz-tick" x="712" y="176">time →</text>
+
+          <!-- successful polls -->
+          <g>
+            <circle class="viz-ok" cx="85"  cy="150" r="11"/><text class="viz-glyph" x="85"  y="154">✓</text>
+            <circle class="viz-ok" cx="160" cy="150" r="11"/><text class="viz-glyph" x="160" y="154">✓</text>
+            <circle class="viz-ok" cx="235" cy="150" r="11"/><text class="viz-glyph" x="235" y="154">✓</text>
+            <text class="viz-tick" x="85"  y="180" text-anchor="middle">09:00</text>
+            <text class="viz-tick" x="160" y="180" text-anchor="middle">09:01</text>
+            <text class="viz-tick" x="235" y="180" text-anchor="middle">09:02</text>
+            <text class="viz-cap ok" x="60" y="112">Polls succeed — watermark advances</text>
+          </g>
+
+          <!-- frozen watermark -->
+          <line class="viz-frozen" x1="330" y1="70" x2="330" y2="196"/>
+          <text class="viz-strong" x="330" y="58" text-anchor="middle">WATERMARK · frozen</text>
+
+          <!-- retries on the same window -->
+          <g>
+            <text class="viz-bad" x="345" y="155" font-size="17" font-weight="700">✗</text>
+            <text class="viz-bad" x="365" y="155" font-size="17" font-weight="700">✗</text>
+            <text class="viz-bad" x="385" y="155" font-size="17" font-weight="700">✗</text>
+            <path class="viz-bad-s" d="M 400 132 C 430 120, 430 118, 400 128" marker-end="url(#retry)"/>
+            <text class="viz-cap bad" x="342" y="210">every poll retries the same window → same error</text>
+          </g>
+
+          <!-- future, never fetched -->
+          <rect class="viz-future" x="470" y="96" width="270" height="80" rx="6"/>
+          <text class="viz-cap mut" x="605" y="132" text-anchor="middle">events after here</text>
+          <text class="viz-cap mut" x="605" y="150" text-anchor="middle">never get fetched</text>
+
+          <defs>
+            <marker id="retry" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path class="viz-bad" d="M0,0 L10,5 L0,10 z"/>
+            </marker>
+          </defs>
+        </svg>
+      </figure>
 
       <ul class="points">
-        <li><strong>Retries alone never resolve it.</strong> The failing window is deterministic — the same request produces the same failure on every attempt, forever. Backoff and retry only change <em>how often</em> it fails, not <em>whether</em>.</li>
-        <li><strong>There is no customer-facing control over the watermark.</strong> The one action that would fix it — move the marker past the bad window — is not exposed anywhere in the product.</li>
-        <li><strong>The fallbacks are heavy.</strong> Re-creating the trigger loses history and re-onboards from scratch; a support ticket pulls in engineering to run a manual database update for something the customer could decide in one click.</li>
-        <li><strong>Autopilot can explain it, but explanation isn't recovery.</strong> <a href="../autopilot-analyze/">Autopilot Analyze</a> tells the customer <em>what</em> is wrong; a chronic “volume / rate” failure still needs a deliberate <em>action</em> to get past it.</li>
+        <li><strong>Retries can't help.</strong> The failure is deterministic — the same window fails the same way every time. Backoff changes <em>how often</em> it fails, never <em>whether</em>.</li>
+        <li><strong>The trigger falls behind silently.</strong> While it's stuck on the old window, every new event lands after the frozen point and is never picked up.</li>
+        <li><strong>There's no way out in the product.</strong> The customer sees a wall of red, with no action to take — the only fixes today are a support ticket or re-creating the trigger from scratch.</li>
       </ul>
 
       <blockquote class="pull">
-        A Salesforce trigger polls for new records. Once the object crosses 100,000 rows, Salesforce returns “Exceeded 100,000 distinct IDs.” The trigger retries the same window, hits the same error — and stays stuck indefinitely.
+        A Salesforce trigger polls for new records. Once the object crosses 100,000 rows, Salesforce returns “Exceeded 100,000 distinct IDs.” The trigger retries the same window, hits the same error — and stays stuck.
         <cite>— the canonical stuck-trigger case</cite>
       </blockquote>
     </section>
@@ -616,102 +644,97 @@
     <!-- 02 BACKGROUND -->
     <section id="background">
       <div class="eyebrow"><span>→</span><span class="num">02</span><span class="sep">/</span><span>Background</span></div>
-      <h2>The pieces this builds on already exist.</h2>
-      <p>Advance Watermark did not need a new service. The watermark, the poller state, the trace history, and the Traces UI were all already in place — this feature adds a small, safe control surface on top of them.</p>
+      <h2>The watermark, and why a stuck window freezes it.</h2>
+      <p>The behaviour above comes straight from how pollers track progress. Understanding the watermark is enough to understand both the problem and the fix.</p>
 
       <ul class="points">
-        <li><strong>gallup</strong> (the Integration Service polling service) owns the poller state per object: <code>lastPollDate</code>, the poll <code>interval</code>, and <code>countConsecutivePollError</code> — the count that tells us a trigger is stuck rather than merely quiet.</li>
-        <li><strong>The Traces tab</strong> already renders one row per poll (green ✓ / red ✗) in both Orchestrator (ConnectionService) and Maestro (PO.Frontend), and can expand any trace to its raw span / event data.</li>
-        <li><strong>A trigger is keyed internally by an object.</strong> On a multi-object trigger, each watched object carries its own poller row and its own watermark — so “stuck” and “skip” are properties of an <em>object</em>, not the whole trigger.</li>
-        <li><strong>Recovery today is out-of-band</strong> — a manual SQL update by on-call, or trigger re-creation. There is no API and no UI for it.</li>
-        <li><strong>A separate concern:</strong> a poller in the <code>EXCEEDED</code> auto-suspend state is recovered by a different feature. Advance Watermark operates only on actively-scheduled triggers.</li>
+        <li><strong>The watermark is the “last checked” point.</strong> After each successful poll a marker — <code>lastPollDate</code> — moves forward, and the next poll starts from there. It's what stops us re-reading the same events.</li>
+        <li><strong>It only moves on success.</strong> A failed poll leaves <code>lastPollDate</code> where it is — so a window that can't be polled becomes a wall the watermark can never get past on its own.</li>
+        <li><strong>It's per object.</strong> Each watched object on a trigger has its own poller row and its own watermark, so “stuck” is a property of one object, not the whole trigger.</li>
+        <li><strong>“Stuck” is measurable.</strong> The poller row tracks <code>consecutivePollErrors</code> — the signal that tells us a trigger is genuinely stuck, not just quiet.</li>
       </ul>
     </section>
 
     <!-- 03 GOAL -->
     <section id="goal">
       <div class="eyebrow"><span>→</span><span class="num">03</span><span class="sep">/</span><span>Goal</span></div>
-      <h2>Turn “watch it fail” into “skip past it,” safely.</h2>
+      <h2>Let customers move past the stuck window themselves.</h2>
 
       <ul class="points">
-        <li><strong>One-click recovery, in place.</strong> The customer unsticks a poller from the Traces tab they're already in — no ticket, no engineering, no trigger re-creation.</li>
-        <li><strong>Preview before commit.</strong> Skipping moves a watermark forward irreversibly, so the customer can always <em>Verify</em> first — a dry run that tests the projected window without persisting anything.</li>
-        <li><strong>Show the action only when it applies.</strong> The Skip affordance appears when the object is genuinely stuck — consecutive poll errors past a threshold — not on every trigger, and never on one that has simply never polled.</li>
-        <li><strong>Precise scope.</strong> A skip touches only the object that's stuck; other objects on the same trigger are untouched. It advances by exactly one poll interval per click — predictable and repeatable.</li>
-        <li><strong>No new trust surface.</strong> Reuse the same authentication and folder authorization the Traces endpoint already enforces.</li>
+        <li><strong>Self-serve recovery.</strong> Give the customer a way to move the watermark past the window it's stuck on — without a ticket and without re-creating the trigger.</li>
+        <li><strong>Know before you commit.</strong> Let them check whether skipping would actually work, before anything changes.</li>
+        <li><strong>Safe by default.</strong> Offer it only when the trigger is genuinely stuck, and keep the customer in control of the action.</li>
       </ul>
-
-      <div class="note">
-        <strong>Non-goals.</strong> Auto-remediation without a customer click; webhook triggers (this is scoped to date-time-based pollers such as Salesforce and Outlook); and <code>EXCEEDED</code> auto-suspend recovery, which a separate feature owns.
-      </div>
     </section>
 
     <!-- 04 PROPOSAL -->
     <section id="proposal">
       <div class="eyebrow"><span>→</span><span class="num">04</span><span class="sep">/</span><span>Proposal</span></div>
-      <h2>Examine agentically, then act deliberately.</h2>
-      <p>The customer flow is two moves on one surface: an <strong>agentic examination</strong> that reads the trace for them, and a <strong>deliberate action</strong> that moves the watermark. This document covers the action; the examination is Autopilot Analyze.</p>
+      <h2>A Skip button in the Traces tab: preview, then commit.</h2>
+      <p>When a poller is stuck, show the customer a button that moves the watermark one poll interval forward — and let them verify it first.</p>
 
       <ul class="points">
-        <li><strong>See it — agentic examination.</strong> When a trace fails, <a href="../autopilot-analyze/">Autopilot</a> diagnoses it in plain English and, for a chronic “won't self-recover” pattern, points at the skip as the remedy. Diagnose-first: the AI describes <em>what</em> broke; the customer decides whether to act.</li>
-        <li><strong>Solve it — the Skip banner.</strong> When an object's consecutive poll errors cross the threshold, the Traces tab surfaces a <strong>Stuck-trigger banner</strong> inline. The banner reads the backend's authoritative error count — never a count of rows in a filterable grid.</li>
-        <li><strong>The dialog is math-free.</strong> Opening the banner fetches a snapshot: the current watermark, the poll interval, and the <em>projected</em> watermark after one skip — so the UI renders “skip from X to Y” without computing anything itself.</li>
-        <li><strong>Verify → Confirm.</strong>
-          <ul>
-            <li><strong>Verify</strong> runs the exact skip code path as a dry run at the projected window — <em>nothing is written</em> — and reports whether the skip would succeed.</li>
-            <li><strong>Confirm</strong> commits: the watermark moves forward by one interval and polling resumes from the new point.</li>
-          </ul>
-        </li>
-        <li><strong>Per-object, one interval.</strong> The action advances only the stuck object's watermark, by one interval — click again to skip further. Predictable, and isolated on multi-object triggers.</li>
+        <li><strong>The Skip banner.</strong> When an object's <code>consecutivePollErrors</code> cross the threshold, the Traces tab shows a stuck-trigger banner with an <em>Advance Watermark</em> action.</li>
+        <li><strong>A math-free dialog.</strong> Opening it fetches the current watermark, the interval, and the projected watermark after one skip — so the UI just shows “skip from X to Y.”</li>
+        <li><strong>Verify.</strong> A dry run of the exact skip path — nothing is written — that tells the customer whether the skip would succeed.</li>
+        <li><strong>Confirm.</strong> Commits the skip: the watermark moves forward one interval and polling resumes from the new point.</li>
+        <li><strong>Scoped.</strong> Only the stuck object's watermark moves; one interval per click.</li>
       </ul>
 
       <blockquote class="pull">
-        Today, all the customer can do is watch the failures pile up. With this: one click skips the trigger past the bad window, and polling resumes.
+        Today the customer can only watch the failures pile up. With this: one click moves past the bad window, and polling resumes.
       </blockquote>
     </section>
 
     <!-- 05 HLD -->
     <section id="hld">
       <div class="eyebrow"><span>→</span><span class="num">05</span><span class="sep">/</span><span>High-level design</span></div>
-      <h2>View → detect → verify → commit.</h2>
-      <p>One customer session, as calls between the browser, gallup, and the poller state. Pulses trace the actual data path — orange for requests, green for responses, grey for user actions, amber for the watermark write.</p>
+      <h2>End-to-end flow.</h2>
+      <p>One customer session, as calls between the browser, gallup, and the poller state.</p>
 
-      <figure class="diagram-wrap">
-        <svg viewBox="0 0 920 760" role="img" aria-labelledby="hld-title hld-desc" preserveAspectRatio="xMidYMid meet">
+      <figure class="diagram-wrap hld">
+        <svg viewBox="0 0 920 790" role="img" aria-labelledby="hld-title hld-desc" preserveAspectRatio="xMidYMid meet">
           <title id="hld-title">Advance Watermark — sequence diagram</title>
           <desc id="hld-desc">
-            The customer opens the Traces tab; the UI fetches trace rows and span data from gallup, which include each object's consecutive-poll-error count. When that count crosses the threshold the UI shows a stuck-trigger banner. The customer clicks Advance Watermark; the UI fetches the poll-date snapshot, the customer clicks Verify which dry-runs the advance without writing, then Confirm which commits the advance — gallup updates lastPollDate by one interval and polling resumes.
+            The customer opens the Traces tab; the UI fetches trace rows from gallup, which include each object's consecutive-poll-error count. When that count crosses the threshold the UI shows a stuck-trigger banner. The customer clicks Advance Watermark; the UI fetches the poll-date snapshot; the customer clicks Verify, which dry-runs the advance inside gallup without writing; then Confirm, which commits — gallup updates lastPollDate by one interval and polling resumes.
           </desc>
+
+          <!-- in-diagram legend -->
+          <g>
+            <circle cx="34" cy="14" r="4" fill="var(--ink-2)"/><text class="legend-txt" x="44" y="18">user</text>
+            <circle cx="120" cy="14" r="4" fill="var(--accent)"/><text class="legend-txt" x="130" y="18">request</text>
+            <circle cx="230" cy="14" r="4" fill="var(--ok)"/><text class="legend-txt" x="240" y="18">response</text>
+            <circle cx="345" cy="14" r="4" fill="var(--warn)"/><text class="legend-txt" x="355" y="18">watermark write</text>
+          </g>
 
           <!-- lane headers -->
           <g>
-            <rect class="lane-box" x="20"  y="20" width="180" height="56" rx="8"/>
-            <text class="lane-label" x="110" y="46" text-anchor="middle">Customer</text>
-            <text class="lane-sub"   x="110" y="62" text-anchor="middle">in the Traces tab</text>
+            <rect class="lane-box" x="20"  y="34" width="180" height="52" rx="8"/>
+            <text class="lane-label" x="110" y="58" text-anchor="middle">Customer</text>
+            <text class="lane-sub"   x="110" y="74" text-anchor="middle">in the Traces tab</text>
 
-            <rect class="lane-box" x="240" y="20" width="200" height="56" rx="8"/>
-            <text class="lane-label" x="340" y="46" text-anchor="middle">Traces UI</text>
-            <text class="lane-sub"   x="340" y="62" text-anchor="middle">Orchestrator / Maestro</text>
+            <rect class="lane-box" x="240" y="34" width="200" height="52" rx="8"/>
+            <text class="lane-label" x="340" y="58" text-anchor="middle">Traces UI</text>
+            <text class="lane-sub"   x="340" y="74" text-anchor="middle">Orchestrator / Maestro</text>
 
-            <rect class="lane-box" x="480" y="20" width="180" height="56" rx="8"/>
-            <text class="lane-label" x="570" y="46" text-anchor="middle">gallup</text>
-            <text class="lane-sub"   x="570" y="62" text-anchor="middle">poll-date API</text>
+            <rect class="lane-box" x="480" y="34" width="180" height="52" rx="8"/>
+            <text class="lane-label" x="570" y="58" text-anchor="middle">gallup</text>
+            <text class="lane-sub"   x="570" y="74" text-anchor="middle">poll-date API</text>
 
-            <rect class="lane-box" x="700" y="20" width="200" height="56" rx="8"/>
-            <text class="lane-label" x="800" y="46" text-anchor="middle">Poller state</text>
-            <text class="lane-sub"   x="800" y="62" text-anchor="middle">watermark · SQL</text>
+            <rect class="lane-box" x="700" y="34" width="200" height="52" rx="8"/>
+            <text class="lane-label" x="800" y="58" text-anchor="middle">Poller state</text>
+            <text class="lane-sub"   x="800" y="74" text-anchor="middle">watermark · SQL</text>
           </g>
 
           <!-- lifelines -->
-          <line class="lifeline" x1="110" y1="82" x2="110" y2="740"/>
-          <line class="lifeline" x1="340" y1="82" x2="340" y2="740"/>
-          <line class="lifeline" x1="570" y1="82" x2="570" y2="740"/>
-          <line class="lifeline" x1="800" y1="82" x2="800" y2="740"/>
+          <line class="lifeline" x1="110" y1="92" x2="110" y2="770"/>
+          <line class="lifeline" x1="340" y1="92" x2="340" y2="770"/>
+          <line class="lifeline" x1="570" y1="92" x2="570" y2="770"/>
+          <line class="lifeline" x1="800" y1="92" x2="800" y2="770"/>
 
           <!-- banner highlight band around step 4 -->
-          <rect class="banner-band" x="250" y="238" width="180" height="54" rx="7"/>
+          <rect class="banner-band" x="250" y="250" width="180" height="54" rx="7"/>
 
-          <!-- arrowhead defs -->
           <defs>
             <marker id="head-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
               <path class="arrowhead-fill" d="M0,0 L10,5 L0,10 z"/>
@@ -727,187 +750,165 @@
             </marker>
           </defs>
 
-          <!-- 01: user → UI -->
+          <!-- 01 -->
           <g>
-            <path class="arrow" d="M 110 120 L 335 120" marker-end="url(#head-ink)"/>
-            <text class="msg-num"   x="115" y="112">01</text>
-            <text class="msg-label" x="140" y="112">Opens Traces tab · expands a failing trigger</text>
+            <path class="arrow" d="M 110 132 L 335 132" marker-end="url(#head-ink)"/>
+            <text class="msg-num" x="115" y="124">01</text>
+            <text class="msg-label" x="140" y="124">Opens Traces tab · expands a failing trigger</text>
+          </g>
+          <!-- 02 -->
+          <g>
+            <path class="arrow req" d="M 340 177 L 565 177" marker-end="url(#head-req)"/>
+            <text class="msg-num" x="345" y="169">02</text>
+            <text class="msg-label" x="370" y="169">GET /polling/traces  <tspan class="msg-endpoint">+ span data</tspan></text>
+          </g>
+          <!-- 03 -->
+          <g>
+            <path class="arrow resp" d="M 570 217 L 345 217" marker-end="url(#head-resp)"/>
+            <text class="msg-num" x="365" y="209">03</text>
+            <text class="msg-label" x="390" y="209">rows ✓/✗ · <tspan class="msg-endpoint">consecutivePollErrors</tspan></text>
+          </g>
+          <!-- 04 self -->
+          <g>
+            <path class="arrow self" d="M 340 262 C 402 262, 402 300, 340 300"/>
+            <text class="msg-num" x="412" y="274">04</text>
+            <text class="msg-label" x="437" y="274">errors ≥ threshold</text>
+            <text class="msg-endpoint" x="412" y="290">→ show Stuck-trigger banner</text>
+          </g>
+          <!-- 05 -->
+          <g>
+            <path class="arrow" d="M 110 342 L 335 342" marker-end="url(#head-ink)"/>
+            <text class="msg-num" x="115" y="334">05</text>
+            <text class="msg-label" x="140" y="334">Clicks “Advance Watermark”</text>
+          </g>
+          <!-- 06 -->
+          <g>
+            <path class="arrow req" d="M 340 387 L 565 387" marker-end="url(#head-req)"/>
+            <text class="msg-num" x="345" y="379">06</text>
+            <text class="msg-label" x="370" y="379">GET /poll-date  <tspan class="msg-endpoint">· snapshot</tspan></text>
+          </g>
+          <!-- 07 -->
+          <g>
+            <path class="arrow resp" d="M 570 427 L 345 427" marker-end="url(#head-resp)"/>
+            <text class="msg-num" x="365" y="419">07</text>
+            <text class="msg-label" x="390" y="419">current + projected watermark · interval</text>
+          </g>
+          <!-- 08 -->
+          <g>
+            <path class="arrow" d="M 110 467 L 335 467" marker-end="url(#head-ink)"/>
+            <text class="msg-num" x="115" y="459">08</text>
+            <text class="msg-label" x="140" y="459">Clicks “Verify” (dry run)</text>
+          </g>
+          <!-- 09 -->
+          <g>
+            <path class="arrow req" d="M 340 507 L 565 507" marker-end="url(#head-req)"/>
+            <text class="msg-num" x="345" y="499">09</text>
+            <text class="msg-label" x="370" y="499">POST /poll-date/advance  <tspan class="msg-endpoint">?dryRun=true</tspan></text>
+          </g>
+          <!-- 10 gallup self-loop: dry-run, no write -->
+          <g>
+            <path class="arrow self" d="M 570 525 C 632 525, 632 563, 570 563"/>
+            <text class="msg-num" x="642" y="537">10</text>
+            <text class="msg-label" x="667" y="537">evaluates via debug-process</text>
+            <text class="msg-endpoint" x="642" y="553">nothing is written</text>
+          </g>
+          <!-- 11 -->
+          <g>
+            <path class="arrow resp" d="M 570 595 L 345 595" marker-end="url(#head-resp)"/>
+            <text class="msg-num" x="365" y="587">11</text>
+            <text class="msg-label" x="390" y="587">preview: skip would succeed</text>
+          </g>
+          <!-- 12 -->
+          <g>
+            <path class="arrow" d="M 110 635 L 335 635" marker-end="url(#head-ink)"/>
+            <text class="msg-num" x="115" y="627">12</text>
+            <text class="msg-label" x="140" y="627">Clicks “Confirm skip”</text>
+          </g>
+          <!-- 13 -->
+          <g>
+            <path class="arrow req" d="M 340 675 L 565 675" marker-end="url(#head-req)"/>
+            <text class="msg-num" x="345" y="667">13</text>
+            <text class="msg-label" x="370" y="667">POST /poll-date/advance  <tspan class="msg-endpoint">· commit</tspan></text>
+          </g>
+          <!-- 14 -->
+          <g>
+            <path class="arrow write" d="M 570 720 L 795 720" marker-end="url(#head-write)"/>
+            <text class="msg-num" x="575" y="712">14</text>
+            <text class="msg-label" x="600" y="712">UPDATE lastPollDate += interval  <tspan class="msg-endpoint">→ resumes ✓</tspan></text>
           </g>
 
-          <!-- 02: UI → gallup req -->
-          <g>
-            <path class="arrow req" d="M 340 165 L 565 165" marker-end="url(#head-req)"/>
-            <text class="msg-num"   x="345" y="157">02</text>
-            <text class="msg-label" x="370" y="157">GET /polling/traces  <tspan class="msg-endpoint">+ span / event data</tspan></text>
-          </g>
-
-          <!-- 03: gallup → UI resp -->
-          <g>
-            <path class="arrow resp" d="M 570 205 L 345 205" marker-end="url(#head-resp)"/>
-            <text class="msg-num"   x="365" y="197">03</text>
-            <text class="msg-label" x="390" y="197">rows ✓/✗ · span payload · <tspan class="msg-endpoint">consecutivePollErrors</tspan></text>
-          </g>
-
-          <!-- 04: UI self — banner -->
-          <g>
-            <path class="arrow self" d="M 340 250 C 402 250, 402 288, 340 288"/>
-            <text class="msg-num"   x="412" y="262">04</text>
-            <text class="msg-label" x="437" y="262">errors ≥ threshold</text>
-            <text class="msg-endpoint" x="412" y="278">→ render Stuck-trigger banner</text>
-          </g>
-
-          <!-- 05: user → UI -->
-          <g>
-            <path class="arrow" d="M 110 330 L 335 330" marker-end="url(#head-ink)"/>
-            <text class="msg-num"   x="115" y="322">05</text>
-            <text class="msg-label" x="140" y="322">Clicks “Advance Watermark”</text>
-          </g>
-
-          <!-- 06: UI → gallup req -->
-          <g>
-            <path class="arrow req" d="M 340 375 L 565 375" marker-end="url(#head-req)"/>
-            <text class="msg-num"   x="345" y="367">06</text>
-            <text class="msg-label" x="370" y="367">GET /poll-date  <tspan class="msg-endpoint">· snapshot</tspan></text>
-          </g>
-
-          <!-- 07: gallup → UI resp -->
-          <g>
-            <path class="arrow resp" d="M 570 415 L 345 415" marker-end="url(#head-resp)"/>
-            <text class="msg-num"   x="365" y="407">07</text>
-            <text class="msg-label" x="390" y="407">current + projected watermark · interval</text>
-          </g>
-
-          <!-- 08: user → UI verify -->
-          <g>
-            <path class="arrow" d="M 110 455 L 335 455" marker-end="url(#head-ink)"/>
-            <text class="msg-num"   x="115" y="447">08</text>
-            <text class="msg-label" x="140" y="447">Clicks “Verify” (dry run)</text>
-          </g>
-
-          <!-- 09: UI → gallup req dryRun -->
-          <g>
-            <path class="arrow req" d="M 340 495 L 565 495" marker-end="url(#head-req)"/>
-            <text class="msg-num"   x="345" y="487">09</text>
-            <text class="msg-label" x="370" y="487">POST /poll-date/advance  <tspan class="msg-endpoint">?dryRun=true</tspan></text>
-          </g>
-
-          <!-- 10: gallup → poller (test, no write) -->
-          <g>
-            <path class="arrow req" d="M 570 535 L 795 535" stroke-dasharray="2 4" marker-end="url(#head-req)"/>
-            <text class="msg-num"   x="575" y="527">10</text>
-            <text class="msg-label" x="600" y="527">test-poll projected window  <tspan class="msg-endpoint">· nothing written</tspan></text>
-          </g>
-
-          <!-- 11: gallup → UI resp preview -->
-          <g>
-            <path class="arrow resp" d="M 570 575 L 345 575" marker-end="url(#head-resp)"/>
-            <text class="msg-num"   x="365" y="567">11</text>
-            <text class="msg-label" x="390" y="567">preview: skip would succeed</text>
-          </g>
-
-          <!-- 12: user → UI confirm -->
-          <g>
-            <path class="arrow" d="M 110 615 L 335 615" marker-end="url(#head-ink)"/>
-            <text class="msg-num"   x="115" y="607">12</text>
-            <text class="msg-label" x="140" y="607">Clicks “Confirm skip”</text>
-          </g>
-
-          <!-- 13: UI → gallup req commit -->
-          <g>
-            <path class="arrow req" d="M 340 655 L 565 655" marker-end="url(#head-req)"/>
-            <text class="msg-num"   x="345" y="647">13</text>
-            <text class="msg-label" x="370" y="647">POST /poll-date/advance  <tspan class="msg-endpoint">· commit</tspan></text>
-          </g>
-
-          <!-- 14: gallup → poller write -->
-          <g>
-            <path class="arrow write" d="M 570 700 L 795 700" marker-end="url(#head-write)"/>
-            <text class="msg-num"   x="575" y="692">14</text>
-            <text class="msg-label" x="600" y="692">UPDATE lastPollDate += interval  <tspan class="msg-endpoint">→ resumes ✓</tspan></text>
-          </g>
-
-          <!-- Animated pulses: dur=18s cycle, staggered ~1.2s apart, each travels in a ~1.1s window then parks. -->
+          <!-- pulses: dur=28s, staggered every 2s, each travels in a ~1.4s window then parks -->
           <circle class="pulse user" r="4" opacity="0">
-            <animateMotion dur="18s" repeatCount="indefinite" calcMode="linear" path="M 110 120 L 335 120" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" repeatCount="indefinite" calcMode="linear" path="M 110 132 L 335 132" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse" r="4" opacity="0">
-            <animateMotion dur="18s" begin="1.2s" repeatCount="indefinite" calcMode="linear" path="M 340 165 L 565 165" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="1.2s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="2s" repeatCount="indefinite" calcMode="linear" path="M 340 177 L 565 177" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="2s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse resp" r="4" opacity="0">
-            <animateMotion dur="18s" begin="2.4s" repeatCount="indefinite" calcMode="linear" path="M 570 205 L 345 205" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="2.4s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="4s" repeatCount="indefinite" calcMode="linear" path="M 570 217 L 345 217" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="4s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse" r="4" opacity="0">
-            <animateMotion dur="18s" begin="3.6s" repeatCount="indefinite" calcMode="linear" path="M 340 250 C 402 250, 402 288, 340 288" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="3.6s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="6s" repeatCount="indefinite" calcMode="linear" path="M 340 262 C 402 262, 402 300, 340 300" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="6s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse user" r="4" opacity="0">
-            <animateMotion dur="18s" begin="4.8s" repeatCount="indefinite" calcMode="linear" path="M 110 330 L 335 330" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="4.8s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="8s" repeatCount="indefinite" calcMode="linear" path="M 110 342 L 335 342" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="8s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse" r="4" opacity="0">
-            <animateMotion dur="18s" begin="6.0s" repeatCount="indefinite" calcMode="linear" path="M 340 375 L 565 375" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="6.0s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="10s" repeatCount="indefinite" calcMode="linear" path="M 340 387 L 565 387" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="10s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse resp" r="4" opacity="0">
-            <animateMotion dur="18s" begin="7.2s" repeatCount="indefinite" calcMode="linear" path="M 570 415 L 345 415" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="7.2s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="12s" repeatCount="indefinite" calcMode="linear" path="M 570 427 L 345 427" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="12s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse user" r="4" opacity="0">
-            <animateMotion dur="18s" begin="8.4s" repeatCount="indefinite" calcMode="linear" path="M 110 455 L 335 455" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="8.4s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="14s" repeatCount="indefinite" calcMode="linear" path="M 110 467 L 335 467" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="14s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse" r="4" opacity="0">
-            <animateMotion dur="18s" begin="9.6s" repeatCount="indefinite" calcMode="linear" path="M 340 495 L 565 495" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="9.6s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="16s" repeatCount="indefinite" calcMode="linear" path="M 340 507 L 565 507" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="16s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse" r="4" opacity="0">
-            <animateMotion dur="18s" begin="10.8s" repeatCount="indefinite" calcMode="linear" path="M 570 535 L 795 535" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="10.8s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="18s" repeatCount="indefinite" calcMode="linear" path="M 570 525 C 632 525, 632 563, 570 563" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="18s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse resp" r="4" opacity="0">
-            <animateMotion dur="18s" begin="12.0s" repeatCount="indefinite" calcMode="linear" path="M 570 575 L 345 575" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="12.0s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="20s" repeatCount="indefinite" calcMode="linear" path="M 570 595 L 345 595" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="20s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse user" r="4" opacity="0">
-            <animateMotion dur="18s" begin="13.2s" repeatCount="indefinite" calcMode="linear" path="M 110 615 L 335 615" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="13.2s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="22s" repeatCount="indefinite" calcMode="linear" path="M 110 635 L 335 635" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="22s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse" r="4" opacity="0">
-            <animateMotion dur="18s" begin="14.4s" repeatCount="indefinite" calcMode="linear" path="M 340 655 L 565 655" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="14.4s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="24s" repeatCount="indefinite" calcMode="linear" path="M 340 675 L 565 675" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="24s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
           <circle class="pulse write" r="4.5" opacity="0">
-            <animateMotion dur="18s" begin="15.6s" repeatCount="indefinite" calcMode="linear" path="M 570 700 L 795 700" keyPoints="0;1;1" keyTimes="0;0.06;1"/>
-            <animate attributeName="opacity" dur="18s" begin="15.6s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.004;0.056;0.06;1"/>
+            <animateMotion dur="28s" begin="26s" repeatCount="indefinite" calcMode="linear" path="M 570 720 L 795 720" keyPoints="0;1;1" keyTimes="0;0.05;1"/>
+            <animate attributeName="opacity" dur="28s" begin="26s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.003;0.047;0.05;1"/>
           </circle>
         </svg>
-        <figcaption class="diagram-caption">
-          The pulses loop every 18 seconds, staggered to trace steps 01 → 14 in order. Step 04 (the amber-banded self-loop) is the client deciding to show the banner from the authoritative <code>consecutivePollErrors</code>; steps 09–11 are the <strong>Verify</strong> dry run (no write); steps 13–14 are the <strong>Confirm</strong> commit. Motion is suppressed under <code>prefers-reduced-motion</code>.
-        </figcaption>
-        <div class="diagram-legend" aria-hidden="true">
-          <span class="swatch"><span class="dot d-user"></span>User action</span>
-          <span class="swatch"><span class="dot d-req"></span>Request</span>
-          <span class="swatch"><span class="dot d-resp"></span>Response</span>
-          <span class="swatch"><span class="dot d-write"></span>Watermark write</span>
-        </div>
       </figure>
 
       <h3>Reading the diagram</h3>
       <ul class="points">
-        <li><strong>Step 04 reads the backend, not the grid.</strong> The banner is gated on <code>consecutivePollErrors</code> from the poller row — a filter applied to the visible traces can never turn the banner on or off.</li>
-        <li><strong>Steps 09–11 write nothing.</strong> The dry run exercises the identical advance code path against the projected window, so the preview is faithful — it just doesn't persist.</li>
-        <li><strong>Step 14 is the only mutation.</strong> One <code>UPDATE</code> moves <code>lastPollDate</code> forward by one interval; polling resumes on the next scheduled poll.</li>
+        <li><strong>Step 04 reads the backend, not the grid.</strong> The banner is gated on <code>consecutivePollErrors</code> — a filter on the visible traces can't turn it on or off.</li>
+        <li><strong>Verify writes nothing (09–11); commit is the only write (13–14).</strong> The dry run runs the same advance logic inside gallup and reports the outcome without persisting.</li>
       </ul>
     </section>
 
     <!-- 06 APIS -->
     <section id="apis">
-      <div class="eyebrow"><span>→</span><span class="num">06</span><span class="sep">/</span><span>New APIs</span></div>
+      <div class="eyebrow"><span>→</span><span class="num">06</span><span class="sep">/</span><span>APIs</span></div>
       <h2>A small poll-date surface on gallup.</h2>
-      <p>Three trigger-scoped endpoints, added next to the existing traces endpoint. All share one auth path (see <a href="#auth">§07</a>) and one identification contract.</p>
+      <p>Two trigger-scoped endpoints, added next to the existing traces endpoint.</p>
 
       <div class="compare-scroll">
         <table class="compare">
@@ -926,60 +927,29 @@
             </tr>
             <tr>
               <th class="verb-cell"><span class="verb post">POST</span> <code>/poll-date/advance</code></th>
-              <td>Advance the watermark by one interval. <code>dryRun</code> folds Verify and Commit into one endpoint.</td>
-              <td><code>dryRun:true</code> → preview, nothing persisted. Omitted → commits the advance.</td>
-            </tr>
-            <tr>
-              <th class="verb-cell"><span class="verb post">POST</span> <code>/poll-date/set</code></th>
-              <td>Set the watermark to a customer-chosen time.</td>
-              <td>Forward-compatible; returns <code>501</code> today, contract wired so the UI is ready.</td>
+              <td>Advance the watermark by one interval.</td>
+              <td><code>dryRun:true</code> → Verify preview, nothing persisted. Omitted → commits the advance.</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <h3>Identification contract</h3>
-      <div class="api-block">
-        <div class="row">
-          <span class="verb post">POST</span>
-          <span class="path"><span class="literal">/v3/polling/connections/</span><span class="var">{connectionId}</span><span class="literal">/poll-date/advance</span></span>
-        </div>
-      </div>
-      <ul class="points">
-        <li><strong><code>triggerId</code> is a required UUID</strong>, validated by Joi at the edge — validation runs <em>before</em> auth, so a malformed request never reaches the authorizer.</li>
-        <li><strong>The caller never passes an object name.</strong> gallup resolves the internal polling-row key from <code>triggerId</code>; the UI always has the trigger id, so the legacy object-name path was dropped from the request contract.</li>
-        <li><strong>One endpoint, two modes.</strong> <code>dryRun:true</code> guarantees the preview runs the exact same code as the commit — the two can't drift.</li>
-      </ul>
+      <p style="color:var(--muted);font-size:14px;">Both authenticate exactly like the traces endpoint — a UiPath Identity JWT plus folder authorization (<code>Schedules.View</code>) — so no new trust surface is introduced.</p>
     </section>
 
-    <!-- 07 AUTH & GUARDRAILS -->
-    <section id="auth">
-      <div class="eyebrow"><span>→</span><span class="num">07</span><span class="sep">/</span><span>Auth &amp; guardrails</span></div>
-      <h2>Same trust model as traces; guardrails on the destructive path.</h2>
-      <p>Skip moves a watermark forward irreversibly, so the safety comes from several independent layers rather than a single check.</p>
-
-      <ul class="points">
-        <li><strong>Unified auth.</strong> The poll-date endpoints authenticate exactly like the traces endpoint — a UiPath Identity JWT (<code>authenticate()</code>) followed by folder authorization (<code>folderAuth()</code>) requiring <code>Schedules.View</code> on the trigger.</li>
-        <li><strong>Source-aware.</strong> <code>source=maestro</code> requests use JWT-only auth (the Maestro UI); everything else (Orchestrator) also runs folder authorization. A single shared dispatcher owns both branches and the “authorizer misconfigured” 500 guard, so no handler repeats it.</li>
-        <li><strong>Gated visibility.</strong> The Skip banner is shown only when <code>consecutivePollErrors</code> crosses the threshold — which cleanly rules out never-polled and stale-window edge cases before the customer can even reach the action.</li>
-        <li><strong>Preview-before-commit.</strong> Verify (dry run) lets the customer confirm the skip would succeed without persisting; commit is a separate, explicit click.</li>
-        <li><strong>Feature-flag before prod.</strong> Because the action is destructive, it ships behind a flag and rolls out per environment before general availability.</li>
-      </ul>
-    </section>
-
-    <!-- 08 DECISIONS -->
+    <!-- 07 DECISIONS -->
     <section id="decisions">
-      <div class="eyebrow"><span>→</span><span class="num">08</span><span class="sep">/</span><span>Decisions</span></div>
-      <h2>Choices already made, and why.</h2>
+      <div class="eyebrow"><span>→</span><span class="num">07</span><span class="sep">/</span><span>Decisions</span></div>
+      <h2>Choices made, and why.</h2>
 
       <ul class="alts">
         <li>
           <div class="alt-head">
             <span class="alt-title">Advance by one interval, per object</span>
-            <span class="alt-verdict chosen">Chosen</span>
+            <span class="alt-verdict chosen">For now</span>
           </div>
           <div class="alt-body">
-            A skip moves the stuck object's watermark forward by exactly one poll interval, and touches no other object on the trigger. Predictable (the customer knows precisely what one click does), repeatable (click again to go further), and isolated (multi-object triggers stay independent). A “skip to now” jump was rejected as too blunt — it can silently discard a large, legitimately-pollable range.
+            One click moves the stuck object's watermark forward by exactly one poll interval, and touches nothing else. It's predictable and repeatable (click again to go further). Letting the customer pick a custom target date — “skip to here” — is the natural next step, wired behind <code>POST /poll-date/set</code> for later; a blunt “skip to now” was avoided because it can silently discard a legitimately-pollable range.
           </div>
         </li>
         <li>
@@ -988,54 +958,36 @@
             <span class="alt-verdict chosen">Chosen</span>
           </div>
           <div class="alt-body">
-            Rather than a separate <code>/advance/verify</code> route, a single <code>POST /poll-date/advance</code> takes a <code>dryRun</code> flag. This is more REST-friendly (one resource, mode chosen by a flag) and — more importantly — guarantees the preview exercises the exact commit code path, so they can never diverge.
+            Rather than a separate verify route, <code>POST /poll-date/advance</code> takes a <code>dryRun</code> flag. This guarantees the preview runs the <em>exact</em> commit code path — so what Verify shows can never drift from what Confirm does.
           </div>
         </li>
         <li>
           <div class="alt-head">
-            <span class="alt-title">Gate the banner on the backend's error count, not the grid</span>
+            <span class="alt-title">Gate the banner on the backend's error count</span>
             <span class="alt-verdict chosen">Chosen</span>
           </div>
           <div class="alt-body">
-            The Skip banner is driven by <code>consecutivePollErrors</code> from the poller row, never by counting failed rows in the traces grid. The grid is filterable, so a row-count gate could be turned on or off by an unrelated filter — a destructive action must read an authoritative field.
-          </div>
-        </li>
-        <li>
-          <div class="alt-head">
-            <span class="alt-title">Resolve object name server-side; require <code>triggerId</code></span>
-            <span class="alt-verdict chosen">Chosen</span>
-          </div>
-          <div class="alt-body">
-            The request contract requires a <code>triggerId</code> UUID and drops the legacy object-name path. The UI always has the trigger id, and gallup resolves the internal polling-row key from it — so there is one identification path to validate, and Joi can enforce it at the edge.
-          </div>
-        </li>
-        <li>
-          <div class="alt-head">
-            <span class="alt-title">Exclude <code>EXCEEDED</code> from scope</span>
-            <span class="alt-verdict rejected">Out of scope</span>
-          </div>
-          <div class="alt-body">
-            Skip operates only on actively-scheduled triggers. A poller in the <code>EXCEEDED</code> auto-suspend state is recovered by a separate feature; folding it in here would blur two different recovery models.
+            The banner is driven by <code>consecutivePollErrors</code> on the poller row, never by counting failed rows in the traces grid. The grid is filterable, so a row-count gate could be flipped on or off by an unrelated filter — a destructive action must read an authoritative field.
           </div>
         </li>
       </ul>
     </section>
 
-    <!-- 09 OPEN -->
-    <section id="open">
-      <div class="eyebrow"><span>→</span><span class="num">09</span><span class="sep">/</span><span>Open questions &amp; future work</span></div>
-      <h2>What's next.</h2>
+    <!-- 08 FLAG & ROLLOUT -->
+    <section id="rollout">
+      <div class="eyebrow"><span>→</span><span class="num">08</span><span class="sep">/</span><span>Feature flag &amp; rollout</span></div>
+      <h2>Off by default. Flag flip is the whole rollback plan.</h2>
 
       <ul class="points">
-        <li><strong>Smart-skip recommendations.</strong> Suggest the right skip distance from the connector's known failure pattern (or the gap since last success) instead of a fixed one-interval step — so a badly-stuck trigger doesn't need many clicks.</li>
-        <li><strong>Autopilot × Advance Watermark.</strong> When <a href="../autopilot-analyze/">Autopilot</a> diagnoses a chronic, skip-able pattern, surface the Skip action directly inside the diagnosis — diagnose and act in one place.</li>
-        <li><strong>Feature-flag &amp; rollout gate.</strong> Confirm the flag name and the per-environment rollout order before general availability, given the destructive nature of the action.</li>
-        <li><strong>Poller Window Replay.</strong> The complement to advancement — re-fetch events from a <em>past</em> window when downstream consumers missed them. Paired with this feature, <strong>skip forward + replay back = a full recovery toolkit</strong>. Requires an idempotency model (leaning: a permanent idempotency key on the trigger record, no TTL) so replay doesn't fire duplicate downstream events.</li>
+        <li><strong>Destructive → gated.</strong> Because a skip moves the watermark irreversibly, the action ships behind a feature flag, default off, added before production.</li>
+        <li><strong>Per UI.</strong> gallup owns the endpoint; each Traces UI (Orchestrator / Maestro) gates its own Skip affordance, so the two can enable independently.</li>
+        <li><strong>Rollout.</strong> Alpha → Staging → Prod, per environment — dark-launch, watch, then progress.</li>
+        <li><strong>Kill switch.</strong> Flipping the flag off is the entire rollback — no data to migrate back.</li>
       </ul>
     </section>
 
     <footer class="doc-footer">
-      <span>Draft v1 · 2026-07-05</span>
+      <span>Draft v1 · 2026-07-06</span>
       <span>Advance Watermark · gallup #2826</span>
     </footer>
 
@@ -1062,7 +1014,6 @@
     matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setLabel);
     setLabel();
 
-    // scrollspy for the TOC
     var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
     var map = {};
     links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
